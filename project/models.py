@@ -8,11 +8,17 @@ class User(models.Model):
     otc = models.CharField(max_length=50, default='Иванович')
     phone = models.CharField(max_length=17, default='8 999 999 99 99')
 
+    def __str__(self):
+        return f'{self.email}, {self.name}, {self.fam}, {self.otc}'
+
 
 class Coordinates(models.Model):
     latitude = models.DecimalField(max_digits=15, decimal_places=2)
     longitude = models.DecimalField(max_digits=15, decimal_places=2)
     height = models.DecimalField(max_digits=15, decimal_places=2)
+
+    def __str__(self):
+        return f'Широта: {self.latitude}, Долгота: {self.longitude}, Высота: {self.height}'
 
 
 class Level(models.Model):
@@ -29,6 +35,9 @@ class Level(models.Model):
     summer = models.CharField(max_length=3, choices=LEVEL, null=True, blank=True)
     autumn = models.CharField(max_length=3, choices=LEVEL, null=True, blank=True)
     spring = models.CharField(max_length=3, choices=LEVEL, null=True, blank=True)
+
+    def __str__(self):
+        return f'зима: {self.winter}, лето: {self.summer}, осень: {self.autumn}, весна: {self.spring}'
 
 
 class Pereval(models.Model):
@@ -49,8 +58,12 @@ class Pereval(models.Model):
     status = models.CharField(choices=STATUS_TYPES, default='new', max_length=15)
 
 
+def get_path_upload_images(instance, file):
+    return f'photos-{instance.pereval.id}/{file}'
+
+
 class Images(models.Model):
     pereval = models.ForeignKey(Pereval, related_name='images', on_delete=models.CASCADE)
-    data = models.ImageField(upload_to='media/pereval/', null=True, blank=True)
+    data = models.ImageField(upload_to=get_path_upload_images, null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
 

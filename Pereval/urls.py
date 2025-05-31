@@ -22,9 +22,7 @@ from project import viewsets
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
-router.register(r'SubmitData', viewsets.PerevalViewset,basename='pereval')
-# router.register(r'images', viewsets.ImagesViewset, basename='images')
-
+router.register(r'SubmitData', viewsets.PerevalViewset, basename='pereval')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
