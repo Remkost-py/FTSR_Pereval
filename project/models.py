@@ -55,4 +55,3 @@ class Images(models.Model):
     data = models.ImageField(upload_to='pereval/', null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
 
-

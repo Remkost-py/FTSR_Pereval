@@ -5,17 +5,13 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            'email', 'fam', 'name', 'otc', 'phone',
-        )
+        fields = '__all__'
 
 
 class CoordinatesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coordinates
-        fields = (
-            'latitude', 'longitude', 'height'
-        )
+        fields = '__all__'
 
 
 class LevelSerializer(serializers.ModelSerializer):
@@ -25,13 +21,12 @@ class LevelSerializer(serializers.ModelSerializer):
             'winter', 'summer', 'autumn', 'spring',
         )
 
+
 class ImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
         fields = ('data', 'title',
                   )
-
-
 
 
 class PerevalSerializer(serializers.ModelSerializer):
@@ -44,7 +39,7 @@ class PerevalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pereval
         fields = ('id', 'beauty_title', 'title', 'other_titles', 'connect', 'add_data',
-                 'user', 'coords', 'level', 'images', 'status',
+                  'user', 'coords', 'level', 'images', 'status',
                   )
 
     def validate(self, data):
@@ -61,4 +56,3 @@ class PerevalSerializer(serializers.ModelSerializer):
             if data_user is not None and any(validating_user_field):
                 raise serializers.ValidationError({"Ошибка": "Запрещено изменять данные пользователя"})
         return data
-

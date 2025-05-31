@@ -20,7 +20,7 @@ from rest_framework import routers, permissions
 from project import viewsets
 
 router = routers.DefaultRouter()
-router.register(r'SubmitData',viewsets.PerevalViewset,basename='pereval')
+router.register(r'SubmitData', viewsets.PerevalViewset,basename='pereval')
 
 
 urlpatterns = [
