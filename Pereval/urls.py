@@ -17,33 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include, re_path
-from rest_framework import routers, permissions
+from rest_framework import routers
 from project import viewsets
 from django.conf.urls.static import static
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
-# drf_spectacular
-# from drf_spectacular.views import (
-#     SpectacularAPIView,
-#     SpectacularSwaggerView,
-#     SpectacularRedocView
-# )
 
 
 router = routers.DefaultRouter()
 router.register(r'SubmitData', viewsets.PerevalViewset, basename='pereval')
 
 schema_view = get_schema_view(
-    openapi.Info(
-        title='Pereval API',
-        default_version='v1',
-        description='Test description',
-        license=openapi.License(name='BSD License'),
-    ),
-    public=True,
-    permission_classes=(permissions.AllowAny),
-)
+        openapi.Info(
+            title='Pereval API',
+            default_version='v1',
+            description='Test description',
+            license=openapi.License(name='BSD License'),
+        ),
+        public=True,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -64,21 +56,6 @@ urlpatterns = [
         schema_view.with_ui('redoc', cache_timeout=0),
         name='schema-redoc'
     ),
-
-    # drf_spectacular
-
-    # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    # # Optional UI:
-    # path(
-    #     'api/schema/swagger-ui/',
-    #     SpectacularSwaggerView.as_view(url_name='schema'),
-    #     name='swagger-ui'
-    # ),
-    # path(
-    #     'api/schema/redoc/',
-    #     SpectacularRedocView.as_view(url_name='schema'),
-    #     name='redoc'
-    # ),
 ]
 
 if settings.DEBUG:
