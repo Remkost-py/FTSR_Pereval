@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 import environ
 from pathlib import Path
+
 # from dotenv import load_dotenv
 #
 # load_dotenv()
@@ -32,7 +33,7 @@ SECRET_KEY = 'django-insecure-%o(9&fg4-m-+8b7e$uk2ds$yx1%%tzd%krhh&)aw)mpei4bm5@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -87,12 +89,12 @@ WSGI_APPLICATION = 'Pereval.wsgi.application'
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': env('FSTR_DB_NAME'),
-         'USER': env('FSTR_DB_LOGIN'),
-         'PASSWORD': env('FSTR_DB_PASS'),
-         'HOST': env('FSTR_DB_HOST'),
-         'PORT': env('FSTR_DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('FSTR_DB_NAME'),
+        'USER': env('FSTR_DB_LOGIN'),
+        'PASSWORD': env('FSTR_DB_PASS'),
+        'HOST': env('FSTR_DB_HOST'),
+        'PORT': env('FSTR_DB_PORT'),
     }
 }
 
@@ -145,7 +147,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ),
+    # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SITE_URL = 'http://127.0.0.1:8000/'
+
+# SPECTACULAR_SETTINGS = {
+#     'TITLE': 'Django5 Test Swagger API',
+#     'DESCRIPTION': 'Django5 Test Swagger API description',
+#     'VERSION': '1.0.0',
+#     'SERVE_INCLUDE_SCHEMA': False,
+#     # OTHER SETTINGS
+# }
