@@ -84,4 +84,3 @@ class PerevalSerializer(WritableNestedModelSerializer):
     #
     #    return pereval
 
-    
