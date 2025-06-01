@@ -25,6 +25,8 @@ class LevelSerializer(serializers.ModelSerializer):
 
 
 class ImagesSerializer(serializers.ModelSerializer):
+    data = serializers.CharField()
+
     class Meta:
         model = Images
         fields = ('data', 'title',

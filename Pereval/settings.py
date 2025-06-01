@@ -10,10 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
+#
+# load_dotenv()
 
-load_dotenv()
+env = environ.Env()
+
+env.read_env(env_file='resourсes.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,23 +85,23 @@ WSGI_APPLICATION = 'Pereval.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.getenv('FSTR_DB_ENGINE'),
-#         'NAME': os.getenv('FSTR_DB_NAME'),
-#         'USER': os.getenv('FSTR_DB_USER'),
-#         'PASSWORD': os.getenv('FSTR_DB_PASS'),
-#         'HOST': os.getenv('FSTR_DB_HOST'),
-#         'PORT': os.getenv('FSTR_DB_PORT'),
-#     },
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': env('FSTR_DB_NAME'),
+         'USER': env('FSTR_DB_LOGIN'),
+         'PASSWORD': env('FSTR_DB_PASS'),
+         'HOST': env('FSTR_DB_HOST'),
+         'PORT': env('FSTR_DB_PORT'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -142,3 +147,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
+
+SITE_URL = 'http://127.0.0.1:8000/'

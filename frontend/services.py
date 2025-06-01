@@ -2,7 +2,7 @@ import base64
 
 
 def get_path_upload_photos_(instance, file):
-    return f'images/pereval-{instance.pereval.id}/{file}'
+    return f'images/pereval_{instance.pereval.id}/{file}'
 
 
 def encode_image_file_to_binary_string(encode_image):
