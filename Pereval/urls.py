@@ -2,7 +2,7 @@
 URL configuration for Pereval project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+    https://docs.djangoproject.com/en/5.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -27,23 +27,23 @@ router = routers.DefaultRouter()
 router.register(r'SubmitData', viewsets.PerevalViewset, basename='pereval')
 
 schema_view = get_schema_view(
-        openapi.Info(
-            title='Pereval API',
-            default_version='v1',
-            description='Test description',
-            terms_of_service="https://www.google.com/policies/terms/",
-            contact=openapi.Contact(email="contact@yourapi.local"),
-            license=openapi.License(name='BSD License'),
-        ),
-        public=True,
-    )
+    openapi.Info(
+        title="Your API",
+        default_version='v1',
+        description="Test description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@yourapi.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include(router.urls)),
     re_path(
-        r'^swagger.(?P<format>json|yaml)$',  # Исправленное регулярное выражение
+        r'^swagger.(?P<format>json|yaml)$',
         schema_view.without_ui(cache_timeout=0),
         name='schema-json'
     ),
