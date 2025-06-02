@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status, serializers
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from .serializers import *
@@ -36,13 +36,13 @@ class PerevalViewset(viewsets.ModelViewSet):
             serializer.save()
             return Response({
                 "status": status.HTTP_200_OK,
-                "message": "OK",
+                "massage": "OK",
                 'id': serializer.data['id'],
             })
         if status.HTTP_400_BAD_REQUEST:
             return Response({
                 "status": status.HTTP_400_BAD_REQUEST,
-                "message": serializer.errors,
+                "massage": serializer.errors,
                 "id": None,
             })
         if status.HTTP_500_INTERNAL_SERVER_ERROR:
@@ -62,6 +62,7 @@ class PerevalViewset(viewsets.ModelViewSet):
                     "state": "1",
                     "message": "Запись изменена",
                 })
+
             else:
                 return Response({
                     "state": "0",
@@ -70,5 +71,5 @@ class PerevalViewset(viewsets.ModelViewSet):
 
         return Response({
             "state": "0",
-            "message": f"Отклонено. Причина: {pereval.get_status_display()}",
+            "message": f"Отклонено. Причина {pereval.get_status_display()} ",
         })

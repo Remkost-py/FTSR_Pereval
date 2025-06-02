@@ -22,6 +22,7 @@ class Coordinates(models.Model):
 
 
 class Level(models.Model):
+    # "А" русская
     LEVEL = (
         ('1А', '1А'),
         ('2А', '2А'),
@@ -66,4 +67,3 @@ class Images(models.Model):
     pereval = models.ForeignKey(Pereval, related_name='images', on_delete=models.CASCADE)
     data = models.ImageField(upload_to=get_path_upload_images, null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
-

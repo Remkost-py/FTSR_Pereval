@@ -1,6 +1,6 @@
 import json
 from django.test import TestCase
-from rest_framework import status, filters
+from rest_framework import status
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from project.models import Pereval, User, Coordinates, Level, Images
@@ -109,7 +109,7 @@ class PerevalApiTestCase(APITestCase):
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
     def test_get_single_pereval(self):
-        url = reverse("pereval-detail", args=[self.pereval1.id,])
+        url = reverse("pereval-detail", args=(self.pereval1.id,))
         response = self.client.get(url)
         serializer_data = PerevalSerializer(self.pereval1).data
         self.assertEqual(serializer_data, response.data)
