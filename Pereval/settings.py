@@ -13,10 +13,6 @@ import os
 import environ
 from pathlib import Path
 
-# from dotenv import load_dotenv
-#
-# load_dotenv()
-
 env = environ.Env()
 
 env.read_env(env_file='resourсes.env')
@@ -87,23 +83,23 @@ WSGI_APPLICATION = 'Pereval.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('FSTR_DB_NAME'),
-        'USER': env('FSTR_DB_LOGIN'),
-        'PASSWORD': env('FSTR_DB_PASS'),
-        'HOST': env('FSTR_DB_HOST'),
-        'PORT': env('FSTR_DB_PORT'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env('FSTR_DB_NAME'),
+#         'USER': env('FSTR_DB_LOGIN'),
+#         'PASSWORD': env('FSTR_DB_PASS'),
+#         'HOST': env('FSTR_DB_HOST'),
+#         'PORT': env('FSTR_DB_PORT'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -150,15 +146,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend'
     ),
-    # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SITE_URL = 'http://127.0.0.1:8000/'
-
-# SPECTACULAR_SETTINGS = {
-#     'TITLE': 'Django5 Test Swagger API',
-#     'DESCRIPTION': 'Django5 Test Swagger API description',
-#     'VERSION': '1.0.0',
-#     'SERVE_INCLUDE_SCHEMA': False,
-#     # OTHER SETTINGS
-# }
